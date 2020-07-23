@@ -80,7 +80,7 @@ class Stg_ATR : public Strategy {
     ATRParams atr_params(_params.ATR_Period);
     atr_params.SetTf(_tf);
     StgParams sparams(new Trade(_tf, _Symbol), new Indi_ATR(atr_params), NULL, NULL);
-    sparams.logger.SetLevel(_log_level);
+    sparams.logger.Ptr().SetLevel(_log_level);
     sparams.SetMagicNo(_magic_no);
     sparams.SetSignals(_params.ATR_SignalOpenMethod, _params.ATR_SignalOpenLevel, _params.ATR_SignalOpenFilterMethod,
                        _params.ATR_SignalOpenBoostMethod, _params.ATR_SignalCloseMethod, _params.ATR_SignalCloseLevel);
