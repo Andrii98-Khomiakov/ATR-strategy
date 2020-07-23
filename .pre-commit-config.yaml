@@ -5,15 +5,15 @@ repos:
     rev: v3.1.0
     hooks:
       - id: check-added-large-files
-      - id: check-ast
       - id: check-byte-order-marker
       - id: check-case-conflict
-      - id: check-docstring-first
       - id: check-executables-have-shebangs
       - id: check-merge-conflict
       - id: check-yaml
       - id: end-of-file-fixer
+        exclude: \.txt$
       - id: trailing-whitespace
+        exclude: \.txt$
 
   - repo: https://github.com/igorshubovych/markdownlint-cli.git
     rev: v0.23.1
@@ -24,15 +24,13 @@ repos:
     rev: master  # or specific git tag
     hooks:
       - id: forbid-binary
-        exclude: \.mqproj$
+        exclude: (\.ico|\.mqproj)$
       - id: git-check     # Configure in .gitattributes
       - id: markdownlint  # Configure in .mdlrc
-      - id: require-ascii
-      - id: script-must-have-extension
-      # - id: shellcheck
-      - id: shfmt
+      # - id: require-ascii
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.23.0
     hooks:
       - id: yamllint
+        args: ["-c", ".yamllint", "-s"]
