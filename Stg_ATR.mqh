@@ -7,14 +7,14 @@
 INPUT int ATR_Period = 14;                 // Period
 INPUT int ATR_Shift = 0;                   // Shift (relative to the current bar, 0 - default)
 INPUT int ATR_SignalOpenMethod = 0;        // Signal open method (0-31)
-INPUT float ATR_SignalOpenLevel = 0;      // Signal open level
+INPUT float ATR_SignalOpenLevel = 0;       // Signal open level
 INPUT int ATR_SignalOpenFilterMethod = 0;  // Signal open filter method
 INPUT int ATR_SignalOpenBoostMethod = 0;   // Signal open boost method
 INPUT int ATR_SignalCloseMethod = 0;       // Signal close method
-INPUT float ATR_SignalCloseLevel = 0;     // Signal close level
+INPUT float ATR_SignalCloseLevel = 0;      // Signal close level
 INPUT int ATR_PriceLimitMethod = 0;        // Price limit method
-INPUT float ATR_PriceLimitLevel = 2;      // Price limit level
-INPUT float ATR_MaxSpread = 6.0;          // Max spread to trade (pips)
+INPUT float ATR_PriceLimitLevel = 2;       // Price limit level
+INPUT float ATR_MaxSpread = 6.0;           // Max spread to trade (pips)
 
 // Includes.
 #include <EA31337-classes/Indicators/Indi_ATR.mqh>
@@ -26,14 +26,14 @@ struct Stg_ATR_Params : StgParams {
   ENUM_APPLIED_PRICE ATR_Applied_Price;
   int ATR_Shift;
   int ATR_SignalOpenMethod;
-  double ATR_SignalOpenLevel;
+  float ATR_SignalOpenLevel;
   int ATR_SignalOpenFilterMethod;
   int ATR_SignalOpenBoostMethod;
   int ATR_SignalCloseMethod;
-  double ATR_SignalCloseLevel;
+  float ATR_SignalCloseLevel;
   int ATR_PriceLimitMethod;
-  double ATR_PriceLimitLevel;
-  double ATR_MaxSpread;
+  float ATR_PriceLimitLevel;
+  float ATR_MaxSpread;
 
   // Constructor: Set default param values.
   Stg_ATR_Params()
@@ -123,6 +123,6 @@ class Stg_ATR : public Strategy {
         break;
       }
     }
-    return _result;
+    return (float)_result;
   }
 };
