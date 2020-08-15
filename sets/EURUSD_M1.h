@@ -1,21 +1,27 @@
-//+------------------------------------------------------------------+
-//|                  EA31337 - multi-strategy advanced trading robot |
-//|                       Copyright 2016-2020, 31337 Investments Ltd |
-//|                                       https://github.com/EA31337 |
-//+------------------------------------------------------------------+
+/*
+ * @file
+ * Defines default strategy parameter values for the given timeframe.
+ */
+
+// Defines indicator's parameter values for the given pair symbol and timeframe.
+struct Indi_ATR_Params_M1 : Indi_ATR_Params {
+  Indi_ATR_Params_M1() : Indi_ATR_Params(indi_atr_defaults, PERIOD_M1) { shift = 0; }
+} indi_atr_m1;
 
 // Defines strategy's parameter values for the given pair symbol and timeframe.
-struct Stg_ATR_EURUSD_M1_Params : Stg_ATR_Params {
-  Stg_ATR_EURUSD_M1_Params() {
-    ATR_Period = 14;
-    ATR_Applied_Price = 1;
-    ATR_Shift = 0;
-    ATR_SignalOpenMethod = 0;
-    ATR_SignalOpenLevel = 0;
-    ATR_SignalCloseMethod = 0;
-    ATR_SignalCloseLevel = 0;
-    ATR_PriceLimitMethod = 0;
-    ATR_PriceLimitLevel = 2;
-    ATR_MaxSpread = 0;
+struct Stg_ATR_Params_M1 : StgParams {
+  // Struct constructor.
+  Stg_ATR_Params_M1() : StgParams(stg_atr_defaults) {
+    lot_size = 0;
+    signal_open_method = 0;
+    signal_open_filter = 1;
+    signal_open_level = 0;
+    signal_open_boost = 0;
+    signal_close_method = 0;
+    signal_close_level = 0;
+    price_limit_method = 0;
+    price_limit_level = 2;
+    tick_filter_method = 1;
+    max_spread = 0;
   }
 } stg_atr_m1;

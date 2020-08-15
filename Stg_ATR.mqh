@@ -3,9 +3,12 @@
  * Implements ATR strategy based on the Average True Range indicator.
  */
 
+// Includes.
+#include <EA31337-classes/Indicators/Indi_ATR.mqh>
+#include <EA31337-classes/Strategy.mqh>
+
 // User input params.
-INPUT int ATR_Period = 14;                 // Period
-INPUT int ATR_Shift = 0;                   // Shift (relative to the current bar, 0 - default)
+INPUT float ATR_LotSize = 0;               // Lot size
 INPUT int ATR_SignalOpenMethod = 0;        // Signal open method (0-31)
 INPUT float ATR_SignalOpenLevel = 0;       // Signal open level
 INPUT int ATR_SignalOpenFilterMethod = 0;  // Signal open filter method
@@ -14,45 +17,51 @@ INPUT int ATR_SignalCloseMethod = 0;       // Signal close method
 INPUT float ATR_SignalCloseLevel = 0;      // Signal close level
 INPUT int ATR_PriceLimitMethod = 0;        // Price limit method
 INPUT float ATR_PriceLimitLevel = 2;       // Price limit level
+INPUT int ATR_TickFilterMethod = 0;        // Tick filter method
 INPUT float ATR_MaxSpread = 6.0;           // Max spread to trade (pips)
+INPUT int ATR_Shift = 0;                   // Shift (relative to the current bar, 0 - default)
+INPUT string __ATR_Indi_ATR_Parameters__ =
+    "-- ATR strategy: ATR indicator params --";  // >>> ATR strategy: ATR indicator <<<
+INPUT int Indi_ATR_Period = 14;                  // Period
 
-// Includes.
-#include <EA31337-classes/Indicators/Indi_ATR.mqh>
-#include <EA31337-classes/Strategy.mqh>
+// Structs.
+
+// Defines struct with default user indicator values.
+struct Indi_ATR_Params_Defaults : ATRParams {
+  Indi_ATR_Params_Defaults() : ATRParams(::Indi_ATR_Period) {}
+} indi_atr_defaults;
+
+// Defines struct to store indicator parameter values.
+struct Indi_ATR_Params : public ATRParams {
+  // Struct constructors.
+  void Indi_ATR_Params(ATRParams &_params, ENUM_TIMEFRAMES _tf) : ATRParams(_params, _tf) {}
+};
+
+// Defines struct with default user strategy values.
+struct Stg_ATR_Params_Defaults : StgParams {
+  Stg_ATR_Params_Defaults()
+      : StgParams(::ATR_SignalOpenMethod, ::ATR_SignalOpenFilterMethod, ::ATR_SignalOpenLevel,
+                  ::ATR_SignalOpenBoostMethod, ::ATR_SignalCloseMethod, ::ATR_SignalCloseLevel, ::ATR_PriceLimitMethod,
+                  ::ATR_PriceLimitLevel, ::ATR_TickFilterMethod, ::ATR_MaxSpread, ::ATR_Shift) {}
+} stg_atr_defaults;
 
 // Struct to define strategy parameters to override.
 struct Stg_ATR_Params : StgParams {
-  unsigned int ATR_Period;
-  ENUM_APPLIED_PRICE ATR_Applied_Price;
-  int ATR_Shift;
-  int ATR_SignalOpenMethod;
-  float ATR_SignalOpenLevel;
-  int ATR_SignalOpenFilterMethod;
-  int ATR_SignalOpenBoostMethod;
-  int ATR_SignalCloseMethod;
-  float ATR_SignalCloseLevel;
-  int ATR_PriceLimitMethod;
-  float ATR_PriceLimitLevel;
-  float ATR_MaxSpread;
+  Indi_ATR_Params iparams;
+  StgParams sparams;
 
-  // Constructor: Set default param values.
-  Stg_ATR_Params()
-      : ATR_Period(::ATR_Period),
-        ATR_Shift(::ATR_Shift),
-        ATR_SignalOpenMethod(::ATR_SignalOpenMethod),
-        ATR_SignalOpenLevel(::ATR_SignalOpenLevel),
-        ATR_SignalOpenFilterMethod(::ATR_SignalOpenFilterMethod),
-        ATR_SignalOpenBoostMethod(::ATR_SignalOpenBoostMethod),
-        ATR_SignalCloseMethod(::ATR_SignalCloseMethod),
-        ATR_SignalCloseLevel(::ATR_SignalCloseLevel),
-        ATR_PriceLimitMethod(::ATR_PriceLimitMethod),
-        ATR_PriceLimitLevel(::ATR_PriceLimitLevel),
-        ATR_MaxSpread(::ATR_MaxSpread) {}
+  // Struct constructors.
+  Stg_ATR_Params(Indi_ATR_Params &_iparams, StgParams &_sparams)
+      : iparams(indi_atr_defaults, _iparams.tf), sparams(stg_atr_defaults) {
+    iparams = _iparams;
+    sparams = _sparams;
+  }
 };
 
 // Loads pair specific param values.
 #include "sets/EURUSD_H1.h"
 #include "sets/EURUSD_H4.h"
+#include "sets/EURUSD_H8.h"
 #include "sets/EURUSD_M1.h"
 #include "sets/EURUSD_M15.h"
 #include "sets/EURUSD_M30.h"
@@ -64,23 +73,24 @@ class Stg_ATR : public Strategy {
 
   static Stg_ATR *Init(ENUM_TIMEFRAMES _tf = NULL, long _magic_no = NULL, ENUM_LOG_LEVEL _log_level = V_INFO) {
     // Initialize strategy initial values.
-    Stg_ATR_Params _params;
+    Indi_ATR_Params _indi_params(indi_atr_defaults, _tf);
+    StgParams _stg_params(stg_atr_defaults);
     if (!Terminal::IsOptimization()) {
-      SetParamsByTf<Stg_ATR_Params>(_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1,
-                                    stg_atr_h4, stg_atr_h4);
+      SetParamsByTf<Indi_ATR_Params>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30,
+                                     indi_atr_h1, indi_atr_h4, indi_atr_h8);
+      SetParamsByTf<StgParams>(_stg_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1,
+                               stg_atr_h4, stg_atr_h8);
     }
+    // Initialize indicator.
+    ATRParams atr_params(_indi_params);
+    _stg_params.SetIndicator(new Indi_ATR(_indi_params));
     // Initialize strategy parameters.
-    ATRParams atr_params(_params.ATR_Period);
-    atr_params.SetTf(_tf);
-    StgParams sparams(new Trade(_tf, _Symbol), new Indi_ATR(atr_params), NULL, NULL);
-    sparams.logger.Ptr().SetLevel(_log_level);
-    sparams.SetMagicNo(_magic_no);
-    sparams.SetSignals(_params.ATR_SignalOpenMethod, _params.ATR_SignalOpenLevel, _params.ATR_SignalOpenFilterMethod,
-                       _params.ATR_SignalOpenBoostMethod, _params.ATR_SignalCloseMethod, _params.ATR_SignalCloseLevel);
-    sparams.SetPriceLimits(_params.ATR_PriceLimitMethod, _params.ATR_PriceLimitLevel);
-    sparams.SetMaxSpread(_params.ATR_MaxSpread);
+    _stg_params.GetLog().SetLevel(_log_level);
+    _stg_params.SetMagicNo(_magic_no);
+    _stg_params.SetTf(_tf, _Symbol);
     // Initialize strategy instance.
-    Strategy *_strat = new Stg_ATR(sparams, "ATR");
+    Strategy *_strat = new Stg_ATR(_stg_params, "ATR");
+    _stg_params.SetStops(_strat, _strat);
     return _strat;
   }
 
