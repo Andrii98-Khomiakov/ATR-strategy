@@ -126,7 +126,7 @@ class Stg_ATR : public Strategy {
     double _default_value = Market().GetCloseOffer(_cmd) + _trail * _method * _direction;
     double _result = _default_value;
     switch (_method) {
-      case 0: {
+      case 1: {
         int _bar_count = (int)_level * (int)_indi.GetPeriod();
         _result = _direction > 0 ? _indi.GetPrice(PRICE_HIGH, _indi.GetHighest(_bar_count))
                                  : _indi.GetPrice(PRICE_LOW, _indi.GetLowest(_bar_count));
