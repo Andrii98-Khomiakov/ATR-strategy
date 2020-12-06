@@ -3,10 +3,6 @@
  * Implements ATR strategy based on the Average True Range indicator.
  */
 
-// Includes.
-#include <EA31337-classes/Indicators/Indi_ATR.mqh>
-#include <EA31337-classes/Strategy.mqh>
-
 // User input params.
 INPUT float ATR_LotSize = 0;               // Lot size
 INPUT int ATR_SignalOpenMethod = 0;        // Signal open method (0-31)
