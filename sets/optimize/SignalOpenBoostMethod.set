@@ -1,0 +1,7 @@
+; Optimize signal open boost method param.
+ATR_SignalOpenBoostMethod,1=1
+ATR_SignalOpenBoostMethod,2=1
+ATR_SignalOpenBoostMethod,3=8
+ATR_SignalOpenBoostMethod,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

@@ -1,0 +1,7 @@
+; Optimize strategy indicator's ATR period param.
+ATR_Indi_ATR_Period,1=4
+ATR_Indi_ATR_Period,2=4
+ATR_Indi_ATR_Period,3=24
+ATR_Indi_ATR_Period,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

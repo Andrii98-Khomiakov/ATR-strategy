@@ -1,0 +1,7 @@
+; Optimize signal close level param.
+ATR_SignalCloseLevel,1=10
+ATR_SignalCloseLevel,2=5
+ATR_SignalCloseLevel,3=40
+ATR_SignalCloseLevel,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

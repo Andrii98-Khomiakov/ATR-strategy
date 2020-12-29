@@ -1,0 +1,7 @@
+; Optimize price stop method param.
+ATR_PriceStopMethod,1=0
+ATR_PriceStopMethod,2=1
+ATR_PriceStopMethod,3=4
+ATR_PriceStopMethod,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

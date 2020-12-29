@@ -1,0 +1,7 @@
+; Optimize strategy shift param.
+ATR_Shift,1=0
+ATR_Shift,2=1
+ATR_Shift,3=1
+ATR_Shift,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

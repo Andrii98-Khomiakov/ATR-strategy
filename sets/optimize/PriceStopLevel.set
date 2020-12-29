@@ -1,0 +1,7 @@
+; Optimize price stop level param.
+ATR_PriceStopLevel,1=10
+ATR_PriceStopLevel,2=5
+ATR_PriceStopLevel,3=40
+ATR_PriceStopLevel,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

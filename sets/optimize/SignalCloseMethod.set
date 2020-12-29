@@ -1,0 +1,7 @@
+; Optimize signal close method param.
+ATR_SignalCloseMethod,1=-4
+ATR_SignalCloseMethod,2=1
+ATR_SignalCloseMethod,3=4
+ATR_SignalCloseMethod,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1

@@ -1,0 +1,7 @@
+; Optimize max spread param.
+ATR_MaxSpread,1=10
+ATR_MaxSpread,2=10
+ATR_MaxSpread,3=40
+ATR_MaxSpread,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1
