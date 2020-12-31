@@ -1,12 +1,12 @@
 ---
-name: Optimize SignalOpenBoostMethod
+name: Optimize SignalOpenFilterMethod
 
 # yamllint disable-line rule:truthy
 on:
   push:
     branches:
-      - 'optimize-sobm'
-      - 'optimize-sobm-*'
+      - 'optimize-sof'
+      - 'optimize-sof-*'
 
 jobs:
   Compile:
@@ -85,7 +85,7 @@ jobs:
           OptFormatJson: true
           OptOptimize: true
           OptVerbose: true
-          SetFile: ${{ github.workspace }}/sets/SignalOpenBoostMethod.set
+          SetFile: ${{ github.workspace }}/sets/SignalOpenFilterMethod.set
           TestExpert: "Stg_ATR"
           TestPeriod: ${{ matrix.tf }}
           TestReportName: Report-${{ matrix.pair }}-${{ matrix.tf }}
@@ -109,7 +109,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Update config file
         env:
-          KEY: signal_open_boost_method
+          KEY: signal_open_filter
         run: |
           ex -u NONE -V1 \
             +"%s@\\<$KEY[^=]\\?=\\s\\?[^-.0-9]\\+\\zs[^;$]\\+@${!pname}@" \
