@@ -99,7 +99,7 @@ class Stg_ATR : public Strategy {
     bool _is_valid = _indi[CURR].IsValid();
     bool _result = _is_valid;
     if (_is_valid) {
-      double _change_pc = Math::ChangeInPct(_indi[1][0], _indi[0][0]);
+      double _change_pc = Math::ChangeInPct(_indi[1][0], _indi[0][0], true);
       switch (_cmd) {
         // Note: ATR doesn't give independent signals. Is used to define volatility (trend strength).
         // Principle: trend must be strengthened. Together with that ATR grows.
