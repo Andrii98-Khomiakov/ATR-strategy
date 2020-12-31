@@ -18,13 +18,13 @@ INPUT float ATR_MaxSpread = 6.0;           // Max spread to trade (pips)
 INPUT int ATR_Shift = 0;                   // Shift (relative to the current bar, 0 - default)
 INPUT string __ATR_Indi_ATR_Parameters__ =
     "-- ATR strategy: ATR indicator params --";  // >>> ATR strategy: ATR indicator <<<
-INPUT int Indi_ATR_Period = 14;                  // Period
+INPUT int ATR_Indi_ATR_Period = 14;              // Period
 
 // Structs.
 
 // Defines struct with default user indicator values.
 struct Indi_ATR_Params_Defaults : ATRParams {
-  Indi_ATR_Params_Defaults() : ATRParams(::Indi_ATR_Period) {}
+  Indi_ATR_Params_Defaults() : ATRParams(::ATR_Indi_ATR_Period) {}
 } indi_atr_defaults;
 
 // Defines struct to store indicator parameter values.
