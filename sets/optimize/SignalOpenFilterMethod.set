@@ -1,6 +1,6 @@
 ; Optimize signal open filter method param.
 ATR_SignalOpenFilterMethod,1=0
-ATR_SignalOpenFilterMethod,2=9
-ATR_SignalOpenFilterMethod,3=49
+ATR_SignalOpenFilterMethod,2=1
+ATR_SignalOpenFilterMethod,3=31
 ATR_SignalOpenFilterMethod,F=1
 ATR_TickFilterMethod=1
