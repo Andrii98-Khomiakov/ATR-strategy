@@ -6,8 +6,6 @@
 // Defines indicator's parameter values for the given pair symbol and timeframe.
 struct Indi_ATR_Params_{{ Timeframe }} : Indi_ATR_Params {
   Indi_ATR_Params_{{ Timeframe }}() : Indi_ATR_Params(indi_atr_defaults, PERIOD_{{ Timeframe }}) {
-    applied_price = (ENUM_APPLIED_PRICE){{ ATR_Indi_ATR_Applied_Price | default(0) }};
-    ma_method = {{ ATR_Indi_ATR_MA_Method | default(0) }};
     period = {{ ATR_Indi_ATR_Period | default(0) }};
     shift = {{ ATR_Shift | default(0) }};
   }

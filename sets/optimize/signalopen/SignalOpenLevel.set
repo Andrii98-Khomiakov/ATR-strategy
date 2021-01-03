@@ -1,7 +1,7 @@
 ; Optimize signal open level param.
 ATR_SignalOpenFilterMethod=1
-ATR_SignalOpenLevel,1=1
-ATR_SignalOpenLevel,2=2
+ATR_SignalOpenLevel,1=0
+ATR_SignalOpenLevel,2=1
 ATR_SignalOpenLevel,3=10
 ATR_SignalOpenLevel,F=1
 ATR_TickFilterMethod=1
