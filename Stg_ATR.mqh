@@ -99,34 +99,29 @@ class Stg_ATR : public Strategy {
     bool _is_valid = _indi[CURR].IsValid();
     bool _result = _is_valid;
     if (_is_valid) {
-      double _change_pc = Math::ChangeInPct(_indi[_shift + 2][0], _indi[_shift][0], true);
       switch (_cmd) {
         // Note: ATR doesn't give independent signals. Is used to define volatility (trend strength).
         // Principle: trend must be strengthened. Together with that ATR grows.
         case ORDER_TYPE_BUY:
-          // Buy: if the indicator is increasing and above zero and a column is green.
-          _result &= _indi[0][0] > 0 && _indi[0][0] > _indi[1][0];
-          _result &= _change_pc > _level;
+          // Buy: if the indicator is increasing and above zero.
+          _result &= _indi[CURR][0] > 0 && _indi.IsIncreasing(3);
+          _result &= _indi.IsIncByPct(_level, 0, 0, 2);
           if (_result && _method != 0) {
-            // ... 2 consecutive columns are above level.
-            if (METHOD(_method, 0)) _result &= Math::ChangeInPct(_indi[2][0], _indi[1][0]) > _level;
-            // ... 3 consecutive columns are green.
-            if (METHOD(_method, 1)) _result &= _indi[2][0] > _indi[3][0];
-            // ... 4 consecutive columns are green.
-            if (METHOD(_method, 2)) _result &= _indi[3][0] > _indi[4][0];
+            if (METHOD(_method, 0)) _result &= _indi.IsIncreasing(2, 0, 3);
+            if (METHOD(_method, 1)) _result &= _indi.IsIncreasing(2, 0, 5);
+            // Signal: Changing from negative values to positive.
+            if (METHOD(_method, 2)) _result &= _indi[PPREV][0] < 0;
           }
           break;
         case ORDER_TYPE_SELL:
           // Sell: if the indicator is decreasing and below zero and a column is red.
-          _result &= _indi[0][0] < 0 && _indi[0][0] < _indi[1][0];
-          _result &= _change_pc < -_level;
+          _result &= _indi[CURR][0] < 0 && _indi.IsDecreasing(3);
+          _result &= _indi.IsDecByPct(-_level, 0, 0, 2);
           if (_result && _method != 0) {
-            // ... 2 consecutive columns are below level.
-            if (METHOD(_method, 0)) _result &= Math::ChangeInPct(_indi[2][0], _indi[1][0]) < _level;
-            // ... 3 consecutive columns are red.
-            if (METHOD(_method, 1)) _result &= _indi[2][0] < _indi[3][0];
-            // ... 4 consecutive columns are red.
-            if (METHOD(_method, 2)) _result &= _indi[3][0] < _indi[4][0];
+            if (METHOD(_method, 0)) _result &= _indi.IsDecreasing(2, 0, 3);
+            if (METHOD(_method, 1)) _result &= _indi.IsDecreasing(2, 0, 5);
+            // Signal: Changing from positive values to negative.
+            if (METHOD(_method, 2)) _result &= _indi[PPREV][0] > 0;
           }
           break;
       }
