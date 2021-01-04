@@ -18,10 +18,10 @@ struct Stg_ATR_Params_{{ Timeframe }} : StgParams {
     lot_size = {{ ATR_LotSize | default(0) }};
     signal_open_method = {{ ATR_SignalOpenMethod | default(0) }};
     signal_open_filter = {{ ATR_SignalOpenFilterMethod | default(1) }};
-    signal_open_level = {{ ATR_SignalOpenLevel | default(0) }};
+    signal_open_level = (float){{ ATR_SignalOpenLevel | default(0) }};
     signal_open_boost = {{ ATR_SignalOpenBoostMethod | default(0) }};
     signal_close_method = {{ ATR_SignalCloseMethod | default(0) }};
-    signal_close_level = {{ ATR_SignalCloseLevel | default(0) }};
+    signal_close_level = (float){{ ATR_SignalCloseLevel | default(0) }};
     price_stop_method = {{ ATR_PriceStopMethod | default(0) }};
     price_stop_level = {{ ATR_SignalCloseLevel | default(1) }};
     tick_filter_method = {{ ATR_TickFilterMethod  | default(1) }};
