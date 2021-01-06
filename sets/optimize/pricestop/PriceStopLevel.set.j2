@@ -1,6 +1,6 @@
 ATR_Indi_ATR_Applied_Price={{ applied_price | replace("(ENUM_APPLIED_PRICE)", "") | int | default(0) }}
 ATR_Indi_ATR_MA_Method={{ ma_method | default(0) }}
-ATR_Indi_ATR_Period={{ period | default(4) }}
+ATR_Indi_ATR_Period={{ (period | default(0) | int) }}
 ATR_Indi_ATR_Shift={{ shift | default(0) }}
 ATR_LotSize={{ lot_size | default(0) }}
 ATR_PriceStopLevel,1=10
