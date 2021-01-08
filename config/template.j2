@@ -23,7 +23,7 @@ struct Stg_ATR_Params_{{ Timeframe }} : StgParams {
     signal_close_method = {{ ATR_SignalCloseMethod | default(0) }};
     signal_close_level = (float){{ ATR_SignalCloseLevel | default(0) }};
     price_stop_method = {{ ATR_PriceStopMethod | default(0) }};
-    price_stop_level = {{ ATR_SignalCloseLevel | default(1) }};
+    price_stop_level = (float){{ ATR_SignalCloseLevel | default(1) }};
     tick_filter_method = {{ ATR_TickFilterMethod  | default(1) }};
     max_spread = {{ ATR_MaxSpread | default(0) }};
   }
