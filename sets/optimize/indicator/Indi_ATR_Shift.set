@@ -1,0 +1,7 @@
+; Optimize indicator's shift param.
+ATR_Indi_ATR_Shift,1=0
+ATR_Indi_ATR_Shift,2=1
+ATR_Indi_ATR_Shift,3=4
+ATR_Indi_ATR_Shift,F=1
+ATR_SignalOpenFilterMethod=1
+ATR_TickFilterMethod=1
