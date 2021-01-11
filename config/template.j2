@@ -4,8 +4,8 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_ATR_Params_{{ Timeframe }} : Indi_ATR_Params {
-  Indi_ATR_Params_{{ Timeframe }}() : Indi_ATR_Params(indi_atr_defaults, PERIOD_{{ Timeframe }}) {
+struct Indi_ATR_Params_{{ Timeframe }} : ATRParams {
+  Indi_ATR_Params_{{ Timeframe }}() : ATRParams(indi_atr_defaults, PERIOD_{{ Timeframe }}) {
     period = {{ ATR_Indi_ATR_Period | default(0) }};
     shift = {{ ATR_Shift | default(0) }};
   }

@@ -28,12 +28,6 @@ struct Indi_ATR_Params_Defaults : ATRParams {
   Indi_ATR_Params_Defaults() : ATRParams(::ATR_Indi_ATR_Period) {}
 } indi_atr_defaults;
 
-// Defines struct to store indicator parameter values.
-struct Indi_ATR_Params : public ATRParams {
-  // Struct constructors.
-  void Indi_ATR_Params(ATRParams &_params, ENUM_TIMEFRAMES _tf) : ATRParams(_params, _tf) {}
-};
-
 // Defines struct with default user strategy values.
 struct Stg_ATR_Params_Defaults : StgParams {
   Stg_ATR_Params_Defaults()
@@ -44,11 +38,11 @@ struct Stg_ATR_Params_Defaults : StgParams {
 
 // Struct to define strategy parameters to override.
 struct Stg_ATR_Params : StgParams {
-  Indi_ATR_Params iparams;
+  ATRParams iparams;
   StgParams sparams;
 
   // Struct constructors.
-  Stg_ATR_Params(Indi_ATR_Params &_iparams, StgParams &_sparams)
+  Stg_ATR_Params(ATRParams &_iparams, StgParams &_sparams)
       : iparams(indi_atr_defaults, _iparams.tf), sparams(stg_atr_defaults) {
     iparams = _iparams;
     sparams = _sparams;
@@ -70,11 +64,11 @@ class Stg_ATR : public Strategy {
 
   static Stg_ATR *Init(ENUM_TIMEFRAMES _tf = NULL, long _magic_no = NULL, ENUM_LOG_LEVEL _log_level = V_INFO) {
     // Initialize strategy initial values.
-    Indi_ATR_Params _indi_params(indi_atr_defaults, _tf);
+    ATRParams _indi_params(indi_atr_defaults, _tf);
     StgParams _stg_params(stg_atr_defaults);
     if (!Terminal::IsOptimization()) {
-      SetParamsByTf<Indi_ATR_Params>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30,
-                                     indi_atr_h1, indi_atr_h4, indi_atr_h8);
+      SetParamsByTf<ATRParams>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30, indi_atr_h1,
+                               indi_atr_h4, indi_atr_h8);
       SetParamsByTf<StgParams>(_stg_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1,
                                stg_atr_h4, stg_atr_h8);
     }

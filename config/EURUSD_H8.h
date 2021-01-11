@@ -4,8 +4,8 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_ATR_Params_H8 : Indi_ATR_Params {
-  Indi_ATR_Params_H8() : Indi_ATR_Params(indi_atr_defaults, PERIOD_H8) { shift = 0; }
+struct Indi_ATR_Params_H8 : ATRParams {
+  Indi_ATR_Params_H8() : ATRParams(indi_atr_defaults, PERIOD_H8) { shift = 0; }
 } indi_atr_h8;
 
 // Defines strategy's parameter values for the given pair symbol and timeframe.
