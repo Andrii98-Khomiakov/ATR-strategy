@@ -7,5 +7,5 @@ ATR_Indi_ATR_Shift={{ shift | default(0) }}
 ATR_LotSize={{ lot_size | default(0) }}
 ATR_PriceStopMethod=0
 ATR_SignalOpenFilterMethod=1
-ATR_SignalOpenLevel={{ signal_open_level | replace("(float)", "") | float | default(0) }}
+ATR_SignalOpenLevel={{ (signal_open_level | default(0) | replace("(float)", "") | float) }}
 ATR_TickFilterMethod=1
