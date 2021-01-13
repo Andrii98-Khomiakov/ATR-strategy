@@ -7,7 +7,7 @@
 struct Indi_ATR_Params_{{ Timeframe }} : ATRParams {
   Indi_ATR_Params_{{ Timeframe }}() : ATRParams(indi_atr_defaults, PERIOD_{{ Timeframe }}) {
     period = {{ ATR_Indi_ATR_Period | default(0) }};
-    shift = {{ ATR_Shift | default(0) }};
+    shift = {{ ATR_Indi_ATR_Shift | default(0) }};
   }
 } indi_atr_{{ Timeframe | lower }};
 

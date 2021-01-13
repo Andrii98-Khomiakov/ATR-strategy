@@ -1,7 +1,7 @@
 ATR_Indi_ATR_Applied_Price={{ applied_price | replace("(ENUM_APPLIED_PRICE)", "") | int | default(0) }}
 ATR_Indi_ATR_MA_Method={{ ma_method | default(0) }}
 ATR_Indi_ATR_Period={{ (period | default(0) | int) }}
-ATR_Indi_ATR_Shift={{ shift | default(0) }}
+ATR_Indi_ATR_Shift={{ (shift | default(0) | int) }}
 ATR_LotSize={{ lot_size | default(0) }}
 ATR_PriceStopLevel={{ (price_stop_level | default(0) | replace("(float)", "") | float) }}
 ATR_PriceStopMethod={{ price_stop_method | default(0) }}
@@ -9,7 +9,7 @@ ATR_SignalCloseLevel={{ (signal_close_level | default(0) | replace("(float)", ""
 ATR_SignalCloseMethod={{ signal_close_method | default(0) }}
 ATR_SignalOpenBoostMethod={{ signal_open_boost | default(0) }}
 ATR_SignalOpenFilterMethod={{  signal_open_filter | default(1) }}
-ATR_SignalOpenLevel={{ (signal_open_level | default(0) | replace("(float)", "") | float) }}
+ATR_SignalOpenLevel={{ signal_open_level | default(0) | float }}
 ATR_SignalOpenMethod,1=-4
 ATR_SignalOpenMethod,2=1
 ATR_SignalOpenMethod,3=4
