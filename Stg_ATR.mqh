@@ -67,12 +67,12 @@ class Stg_ATR : public Strategy {
     // Initialize strategy initial values.
     ATRParams _indi_params(indi_atr_defaults, _tf);
     StgParams _stg_params(stg_atr_defaults);
-    if (!Terminal::IsOptimization()) {
-      SetParamsByTf<ATRParams>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30, indi_atr_h1,
-                               indi_atr_h4, indi_atr_h8);
-      SetParamsByTf<StgParams>(_stg_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1,
-                               stg_atr_h4, stg_atr_h8);
-    }
+#ifdef __config__
+    SetParamsByTf<ATRParams>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30, indi_atr_h1,
+                             indi_atr_h4, indi_atr_h8);
+    SetParamsByTf<StgParams>(_stg_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1, stg_atr_h4,
+                             stg_atr_h8);
+#endif
     // Initialize indicator.
     ATRParams atr_params(_indi_params);
     _stg_params.SetIndicator(new Indi_ATR(_indi_params));
