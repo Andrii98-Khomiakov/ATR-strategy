@@ -1,6 +1,6 @@
-ATR_Indi_ATR_Period,1=4
+ATR_Indi_ATR_Period,1={{ [((period | default(0) | int) - 8), 2] | max }}
 ATR_Indi_ATR_Period,2=4
-ATR_Indi_ATR_Period,3=24
+ATR_Indi_ATR_Period,3={{ (period | default(0) | int) + 8 }}
 ATR_Indi_ATR_Period,F=1
 ATR_Indi_ATR_Period={{ (period | default(0) | int) }}
 ATR_Indi_ATR_Shift={{ (shift | default(0) | int) }}
