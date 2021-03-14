@@ -21,12 +21,13 @@ INPUT int ATR_OrderCloseTime = -20;                             // Order close t
 INPUT string __ATR_Indi_ATR_Parameters__ =
     "-- ATR strategy: ATR indicator params --";  // >>> ATR strategy: ATR indicator <<<
 INPUT int ATR_Indi_ATR_Period = 14;              // Period
+INPUT int ATR_Indi_ATR_Shift = 0;                // Shift
 
 // Structs.
 
 // Defines struct with default user indicator values.
 struct Indi_ATR_Params_Defaults : ATRParams {
-  Indi_ATR_Params_Defaults() : ATRParams(::ATR_Indi_ATR_Period) {}
+  Indi_ATR_Params_Defaults() : ATRParams(::ATR_Indi_ATR_Period, ::ATR_Indi_ATR_Shift) {}
 } indi_atr_defaults;
 
 // Defines struct with default user strategy values.
