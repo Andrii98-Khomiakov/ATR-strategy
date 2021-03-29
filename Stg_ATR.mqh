@@ -16,7 +16,7 @@ INPUT int ATR_PriceStopMethod = 0;                              // Price stop me
 INPUT float ATR_PriceStopLevel = 2;                             // Price stop level
 INPUT int ATR_TickFilterMethod = 1;                             // Tick filter method
 INPUT float ATR_MaxSpread = 4.0;                                // Max spread to trade (pips)
-INPUT int ATR_Shift = 0;                                        // Shift (relative to the current bar, 0 - default)
+INPUT short ATR_Shift = 0;                                      // Shift (relative to the current bar, 0 - default)
 INPUT int ATR_OrderCloseTime = -20;                             // Order close time in mins (>0) or bars (<0)
 INPUT string __ATR_Indi_ATR_Parameters__ =
     "-- ATR strategy: ATR indicator params --";  // >>> ATR strategy: ATR indicator <<<
