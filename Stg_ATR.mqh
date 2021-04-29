@@ -45,7 +45,7 @@ struct Stg_ATR_Params : StgParams {
 
   // Struct constructors.
   Stg_ATR_Params(ATRParams &_iparams, StgParams &_sparams)
-      : iparams(indi_atr_defaults, _iparams.tf), sparams(stg_atr_defaults) {
+      : iparams(indi_atr_defaults, _iparams.tf.GetTf()), sparams(stg_atr_defaults) {
     iparams = _iparams;
     sparams = _sparams;
   }
