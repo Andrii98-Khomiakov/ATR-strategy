@@ -19,7 +19,9 @@ struct Stg_ATR_Params_H1 : StgParams {
     signal_open_boost = 0;
     signal_close_method = 64;
     signal_close_level = (float)0;
-    price_stop_method = 0;
+    price_profit_method = 2;
+    price_profit_level = (float)2;
+    price_stop_method = 2;
     price_stop_level = (float)2;
     tick_filter_method = 32;
     max_spread = 0;
