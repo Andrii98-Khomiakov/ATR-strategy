@@ -11,6 +11,7 @@ INPUT float ATR_SignalOpenLevel = 0.0f;     // Signal open level
 INPUT int ATR_SignalOpenFilterMethod = 32;  // Signal open filter method
 INPUT int ATR_SignalOpenBoostMethod = 0;    // Signal open boost method
 INPUT int ATR_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT int ATR_SignalCloseFilter = 0;        // Signal close filter (-127-127)
 INPUT float ATR_SignalCloseLevel = 0.0f;    // Signal close level
 INPUT int ATR_PriceStopMethod = 1;          // Price stop method
 INPUT float ATR_PriceStopLevel = 2;         // Price stop level
@@ -33,8 +34,9 @@ struct Indi_ATR_Params_Defaults : ATRParams {
 struct Stg_ATR_Params_Defaults : StgParams {
   Stg_ATR_Params_Defaults()
       : StgParams(::ATR_SignalOpenMethod, ::ATR_SignalOpenFilterMethod, ::ATR_SignalOpenLevel,
-                  ::ATR_SignalOpenBoostMethod, ::ATR_SignalCloseMethod, ::ATR_SignalCloseLevel, ::ATR_PriceStopMethod,
-                  ::ATR_PriceStopLevel, ::ATR_TickFilterMethod, ::ATR_MaxSpread, ::ATR_Shift, ::ATR_OrderCloseTime) {}
+                  ::ATR_SignalOpenBoostMethod, ::ATR_SignalCloseMethod, ::ATR_SignalCloseFilter, ::ATR_SignalCloseLevel,
+                  ::ATR_PriceStopMethod, ::ATR_PriceStopLevel, ::ATR_TickFilterMethod, ::ATR_MaxSpread, ::ATR_Shift,
+                  ::ATR_OrderCloseTime) {}
 } stg_atr_defaults;
 
 // Struct to define strategy parameters to override.
