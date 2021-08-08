@@ -18,6 +18,8 @@ INPUT float ATR_PriceStopLevel = 2;         // Price stop level
 INPUT int ATR_TickFilterMethod = 32;        // Tick filter method
 INPUT float ATR_MaxSpread = 4.0;            // Max spread to trade (pips)
 INPUT short ATR_Shift = 0;                  // Shift (relative to the current bar, 0 - default)
+INPUT float ATR_OrderCloseLoss = 0;         // Order close loss
+INPUT float ATR_OrderCloseProfit = 0;       // Order close profit
 INPUT int ATR_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("ATR strategy: ATR indicator params");
 INPUT int ATR_Indi_ATR_Period = 14;  // Period
@@ -35,8 +37,11 @@ struct Stg_ATR_Params_Defaults : StgParams {
   Stg_ATR_Params_Defaults()
       : StgParams(::ATR_SignalOpenMethod, ::ATR_SignalOpenFilterMethod, ::ATR_SignalOpenLevel,
                   ::ATR_SignalOpenBoostMethod, ::ATR_SignalCloseMethod, ::ATR_SignalCloseFilter, ::ATR_SignalCloseLevel,
-                  ::ATR_PriceStopMethod, ::ATR_PriceStopLevel, ::ATR_TickFilterMethod, ::ATR_MaxSpread, ::ATR_Shift,
-                  ::ATR_OrderCloseTime) {}
+                  ::ATR_PriceStopMethod, ::ATR_PriceStopLevel, ::ATR_TickFilterMethod, ::ATR_MaxSpread, ::ATR_Shift) {
+    Set(STRAT_PARAM_OCL, ATR_OrderCloseLoss);
+    Set(STRAT_PARAM_OCP, ATR_OrderCloseProfit);
+    Set(STRAT_PARAM_OCT, ATR_OrderCloseTime);
+  }
 } stg_atr_defaults;
 
 // Struct to define strategy parameters to override.
