@@ -4,24 +4,23 @@
  */
 
 // User input params.
-INPUT string __ATR_Parameters__ = "-- ATR strategy params --";  // >>> ATR <<<
-INPUT float ATR_LotSize = 0;                                    // Lot size
-INPUT int ATR_SignalOpenMethod = 2;                             // Signal open method (-127-127)
-INPUT float ATR_SignalOpenLevel = 0.0f;                         // Signal open level
-INPUT int ATR_SignalOpenFilterMethod = 32;                      // Signal open filter method
-INPUT int ATR_SignalOpenBoostMethod = 0;                        // Signal open boost method
-INPUT int ATR_SignalCloseMethod = 2;                            // Signal close method (-127-127)
-INPUT float ATR_SignalCloseLevel = 0.0f;                        // Signal close level
-INPUT int ATR_PriceStopMethod = 1;                              // Price stop method
-INPUT float ATR_PriceStopLevel = 2;                             // Price stop level
-INPUT int ATR_TickFilterMethod = 32;                            // Tick filter method
-INPUT float ATR_MaxSpread = 4.0;                                // Max spread to trade (pips)
-INPUT short ATR_Shift = 0;                                      // Shift (relative to the current bar, 0 - default)
-INPUT int ATR_OrderCloseTime = -20;                             // Order close time in mins (>0) or bars (<0)
-INPUT string __ATR_Indi_ATR_Parameters__ =
-    "-- ATR strategy: ATR indicator params --";  // >>> ATR strategy: ATR indicator <<<
-INPUT int ATR_Indi_ATR_Period = 14;              // Period
-INPUT int ATR_Indi_ATR_Shift = 0;                // Shift
+INPUT_GROUP("ATR strategy: strategy params");
+INPUT float ATR_LotSize = 0;                // Lot size
+INPUT int ATR_SignalOpenMethod = 2;         // Signal open method (-127-127)
+INPUT float ATR_SignalOpenLevel = 0.0f;     // Signal open level
+INPUT int ATR_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT int ATR_SignalOpenBoostMethod = 0;    // Signal open boost method
+INPUT int ATR_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT float ATR_SignalCloseLevel = 0.0f;    // Signal close level
+INPUT int ATR_PriceStopMethod = 1;          // Price stop method
+INPUT float ATR_PriceStopLevel = 2;         // Price stop level
+INPUT int ATR_TickFilterMethod = 32;        // Tick filter method
+INPUT float ATR_MaxSpread = 4.0;            // Max spread to trade (pips)
+INPUT short ATR_Shift = 0;                  // Shift (relative to the current bar, 0 - default)
+INPUT int ATR_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
+INPUT_GROUP("ATR strategy: ATR indicator params");
+INPUT int ATR_Indi_ATR_Period = 14;  // Period
+INPUT int ATR_Indi_ATR_Shift = 0;    // Shift
 
 // Structs.
 
