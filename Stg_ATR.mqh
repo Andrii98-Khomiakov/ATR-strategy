@@ -90,29 +90,30 @@ class Stg_ATR : public Strategy {
    */
   bool SignalOpen(ENUM_ORDER_TYPE _cmd, int _method = 0, float _level = 0.0f, int _shift = 0) {
     Indi_ATR *_indi = GetIndicator();
-    bool _is_valid = _indi[CURR].IsValid();
-    bool _result = _is_valid;
-    if (_is_valid) {
-      IndicatorSignal _signals = _indi.GetSignals(4, _shift);
-      switch (_cmd) {
-        // Note: ATR doesn't give independent signals. Is used to define volatility (trend strength).
-        // Principle: trend must be strengthened. Together with that ATR grows.
-        case ORDER_TYPE_BUY:
-          // Buy: if the indicator is increasing and above zero.
-          // Buy: if the indicator values are increasing.
-          _result &= _indi[CURR][0] > 0 && _indi.IsIncreasing(2);
-          _result &= _indi.IsIncByPct(_level, 0, 0, 3);
-          _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
-          // @todo: Signal: Changing from negative values to positive.
-          break;
-        case ORDER_TYPE_SELL:
-          // Sell: if the indicator is decreasing and below zero and a column is red.
-          _result &= _indi[CURR][0] < 0 && _indi.IsDecreasing(2);
-          _result &= _indi.IsDecByPct(-_level, 0, 0, 3);
-          _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
-          // @todo: Signal: Changing from positive values to negative.
-          break;
-      }
+    bool _result = _indi.GetFlag(INDI_ENTRY_FLAG_IS_VALID);
+    if (!_result) {
+      // Returns false when indicator data is not valid.
+      return false;
+    }
+    IndicatorSignal _signals = _indi.GetSignals(4, _shift);
+    switch (_cmd) {
+      // Note: ATR doesn't give independent signals. Is used to define volatility (trend strength).
+      // Principle: trend must be strengthened. Together with that ATR grows.
+      case ORDER_TYPE_BUY:
+        // Buy: if the indicator is increasing and above zero.
+        // Buy: if the indicator values are increasing.
+        _result &= _indi[CURR][0] > 0 && _indi.IsIncreasing(2);
+        _result &= _indi.IsIncByPct(_level, 0, 0, 3);
+        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
+        // @todo: Signal: Changing from negative values to positive.
+        break;
+      case ORDER_TYPE_SELL:
+        // Sell: if the indicator is decreasing and below zero and a column is red.
+        _result &= _indi[CURR][0] < 0 && _indi.IsDecreasing(2);
+        _result &= _indi.IsDecByPct(-_level, 0, 0, 3);
+        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
+        // @todo: Signal: Changing from positive values to negative.
+        break;
     }
     return _result;
   }
