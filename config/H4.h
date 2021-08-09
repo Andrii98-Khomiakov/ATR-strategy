@@ -14,7 +14,6 @@ struct Stg_ATR_Params_H4 : StgParams {
   Stg_ATR_Params_H4() : StgParams(stg_atr_defaults) {
     lot_size = 0;
     signal_open_method = 64;
-    signal_open_filter = 32;
     signal_open_level = (float)10;
     signal_open_boost = 0;
     signal_close_method = 64;
