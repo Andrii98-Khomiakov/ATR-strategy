@@ -21,7 +21,7 @@ INPUT float ATR_MaxSpread = 4.0;            // Max spread to trade (pips)
 INPUT short ATR_Shift = 0;                  // Shift (relative to the current bar, 0 - default)
 INPUT float ATR_OrderCloseLoss = 0;         // Order close loss
 INPUT float ATR_OrderCloseProfit = 0;       // Order close profit
-INPUT int ATR_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
+INPUT int ATR_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("ATR strategy: ATR indicator params");
 INPUT int ATR_Indi_ATR_Period = 13;  // Period
 INPUT int ATR_Indi_ATR_Shift = 0;    // Shift
