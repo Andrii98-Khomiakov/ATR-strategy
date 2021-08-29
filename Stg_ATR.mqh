@@ -39,6 +39,7 @@ struct Stg_ATR_Params_Defaults : StgParams {
       : StgParams(::ATR_SignalOpenMethod, ::ATR_SignalOpenFilterMethod, ::ATR_SignalOpenLevel,
                   ::ATR_SignalOpenBoostMethod, ::ATR_SignalCloseMethod, ::ATR_SignalCloseFilter, ::ATR_SignalCloseLevel,
                   ::ATR_PriceStopMethod, ::ATR_PriceStopLevel, ::ATR_TickFilterMethod, ::ATR_MaxSpread, ::ATR_Shift) {
+    Set(STRAT_PARAM_LS, ATR_LotSize);
     Set(STRAT_PARAM_OCL, ATR_OrderCloseLoss);
     Set(STRAT_PARAM_OCP, ATR_OrderCloseProfit);
     Set(STRAT_PARAM_OCT, ATR_OrderCloseTime);
