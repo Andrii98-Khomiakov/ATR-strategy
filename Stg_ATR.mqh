@@ -75,7 +75,7 @@ class Stg_ATR : public Strategy {
   Stg_ATR(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
       : Strategy(_sparams, _tparams, _cparams, _name) {}
 
-  static Stg_ATR *Init(ENUM_TIMEFRAMES _tf = NULL, long _magic_no = NULL, ENUM_LOG_LEVEL _log_level = V_INFO) {
+  static Stg_ATR *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
     ATRParams _indi_params(indi_atr_defaults, _tf);
     StgParams _stg_params(stg_atr_defaults);
@@ -90,7 +90,7 @@ class Stg_ATR : public Strategy {
     _stg_params.SetIndicator(new Indi_ATR(_indi_params));
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
-    TradeParams _tparams(_magic_no, _log_level);
+    TradeParams _tparams;
     Strategy *_strat = new Stg_ATR(_stg_params, _tparams, _cparams, "ATR");
     return _strat;
   }
