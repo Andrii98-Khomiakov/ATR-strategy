@@ -47,19 +47,6 @@ struct Stg_ATR_Params_Defaults : StgParams {
   }
 } stg_atr_defaults;
 
-// Struct to define strategy parameters to override.
-struct Stg_ATR_Params : StgParams {
-  ATRParams iparams;
-  StgParams sparams;
-
-  // Struct constructors.
-  Stg_ATR_Params(ATRParams &_iparams, StgParams &_sparams)
-      : iparams(indi_atr_defaults, _iparams.tf.GetTf()), sparams(stg_atr_defaults) {
-    iparams = _iparams;
-    sparams = _sparams;
-  }
-};
-
 #ifdef __config__
 // Loads pair specific param values.
 #include "config/H1.h"
