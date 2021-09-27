@@ -76,11 +76,11 @@ class Stg_ATR : public Strategy {
                              stg_atr_h8);
 #endif
     // Initialize indicator.
-    _stg_params.SetIndicator(new Indi_ATR(_indi_params));
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_ATR(_stg_params, _tparams, _cparams, "ATR");
+    _strat.SetIndicator(new Indi_ATR(_indi_params));
     return _strat;
   }
 
