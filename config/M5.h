@@ -4,8 +4,8 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_ATR_Params_M5 : ATRParams {
-  Indi_ATR_Params_M5() : ATRParams(indi_atr_defaults, PERIOD_M5) {
+struct Indi_ATR_Params_M5 : IndiATRParams {
+  Indi_ATR_Params_M5() : IndiATRParams(indi_atr_defaults, PERIOD_M5) {
     period = 2;
     shift = 0;
   }

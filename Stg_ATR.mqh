@@ -29,8 +29,8 @@ INPUT int ATR_Indi_ATR_Shift = 0;    // Shift
 // Structs.
 
 // Defines struct with default user indicator values.
-struct Indi_ATR_Params_Defaults : ATRParams {
-  Indi_ATR_Params_Defaults() : ATRParams(::ATR_Indi_ATR_Period, ::ATR_Indi_ATR_Shift) {}
+struct Indi_ATR_Params_Defaults : IndiATRParams {
+  Indi_ATR_Params_Defaults() : IndiATRParams(::ATR_Indi_ATR_Period, ::ATR_Indi_ATR_Shift) {}
 };
 
 // Defines struct with default user strategy values.
@@ -66,12 +66,12 @@ class Stg_ATR : public Strategy {
   static Stg_ATR *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
     Indi_ATR_Params_Defaults indi_atr_defaults;
-    ATRParams _indi_params(indi_atr_defaults, _tf);
+    IndiATRParams _indi_params(indi_atr_defaults, _tf);
     Stg_ATR_Params_Defaults stg_atr_defaults;
     StgParams _stg_params(stg_atr_defaults);
 #ifdef __config__
-    SetParamsByTf<ATRParams>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30, indi_atr_h1,
-                             indi_atr_h4, indi_atr_h8);
+    SetParamsByTf<IndiATRParams>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30, indi_atr_h1,
+                                 indi_atr_h4, indi_atr_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1, stg_atr_h4,
                              stg_atr_h8);
 #endif
