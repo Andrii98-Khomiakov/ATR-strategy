@@ -27,12 +27,6 @@ INPUT int ATR_Indi_ATR_Period = 13;  // Period
 INPUT int ATR_Indi_ATR_Shift = 0;    // Shift
 
 // Structs.
-
-// Defines struct with default user indicator values.
-struct Indi_ATR_Params_Defaults : IndiATRParams {
-  Indi_ATR_Params_Defaults() : IndiATRParams(::ATR_Indi_ATR_Period, ::ATR_Indi_ATR_Shift) {}
-};
-
 // Defines struct with default user strategy values.
 struct Stg_ATR_Params_Defaults : StgParams {
   Stg_ATR_Params_Defaults()
@@ -83,8 +77,8 @@ class Stg_ATR : public Strategy {
    * Event on strategy's init.
    */
   void OnInit() {
-    Indi_ATR_Params_Defaults indi_atr_defaults;
-    IndiATRParams _indi_params(indi_atr_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    IndiATRParams _indi_params(::ATR_Indi_ATR_Period, ::ATR_Indi_ATR_Shift);
+    _indi_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
     SetIndicator(new Indi_ATR(_indi_params));
   }
 
