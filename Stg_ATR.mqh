@@ -65,13 +65,9 @@ class Stg_ATR : public Strategy {
 
   static Stg_ATR *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
-    Indi_ATR_Params_Defaults indi_atr_defaults;
-    IndiATRParams _indi_params(indi_atr_defaults, _tf);
     Stg_ATR_Params_Defaults stg_atr_defaults;
     StgParams _stg_params(stg_atr_defaults);
 #ifdef __config__
-    SetParamsByTf<IndiATRParams>(_indi_params, _tf, indi_atr_m1, indi_atr_m5, indi_atr_m15, indi_atr_m30, indi_atr_h1,
-                                 indi_atr_h4, indi_atr_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_atr_m1, stg_atr_m5, stg_atr_m15, stg_atr_m30, stg_atr_h1, stg_atr_h4,
                              stg_atr_h8);
 #endif
@@ -80,8 +76,16 @@ class Stg_ATR : public Strategy {
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_ATR(_stg_params, _tparams, _cparams, "ATR");
-    _strat.SetIndicator(new Indi_ATR(_indi_params));
     return _strat;
+  }
+
+  /**
+   * Event on strategy's init.
+   */
+  void OnInit() {
+    Indi_ATR_Params_Defaults indi_atr_defaults;
+    IndiATRParams _indi_params(indi_atr_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_ATR(_indi_params));
   }
 
   /**
