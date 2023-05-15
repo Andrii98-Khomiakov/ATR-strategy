@@ -7,13 +7,13 @@
 INPUT_GROUP("ATR strategy: strategy params");
 INPUT float ATR_LotSize = 0;                // Lot size
 INPUT int ATR_SignalOpenMethod = 2;         // Signal open method (-127-127)
-INPUT float ATR_SignalOpenLevel = 0.0f;     // Signal open level
+INPUT float ATR_SignalOpenLevel = 10.0f;    // Signal open level
 INPUT int ATR_SignalOpenFilterMethod = 32;  // Signal open filter method
 INPUT int ATR_SignalOpenFilterTime = 3;     // Signal open filter time
 INPUT int ATR_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT int ATR_SignalCloseMethod = 2;        // Signal close method (-127-127)
-INPUT int ATR_SignalCloseFilter = 0;        // Signal close filter (-127-127)
-INPUT float ATR_SignalCloseLevel = 0.0f;    // Signal close level
+INPUT int ATR_SignalCloseMethod = 0;        // Signal close method (-127-127)
+INPUT int ATR_SignalCloseFilter = 8;        // Signal close filter (-127-127)
+INPUT float ATR_SignalCloseLevel = 10.0f;   // Signal close level
 INPUT int ATR_PriceStopMethod = 1;          // Price stop method (0-127)
 INPUT float ATR_PriceStopLevel = 2;         // Price stop level
 INPUT int ATR_TickFilterMethod = 32;        // Tick filter method
@@ -99,17 +99,19 @@ class Stg_ATR : public Strategy {
       case ORDER_TYPE_BUY:
         // Buy: if the indicator is increasing and above zero.
         // Buy: if the indicator values are increasing.
-        _result &= _indi[CURR][0] > 0 && _indi.IsIncreasing(2);
+        _result &= _indi.IsIncreasing(2);
         _result &= _indi.IsIncByPct(_level, 0, 0, 3);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
-        // @todo: Signal: Changing from negative values to positive.
+        // Signal: Changing from negative values to positive.
+        _result &= _indi.IsDecreasing(1, 0, 2);
         break;
       case ORDER_TYPE_SELL:
         // Sell: if the indicator is decreasing and below zero and a column is red.
-        _result &= _indi[CURR][0] < 0 && _indi.IsDecreasing(2);
+        _result &= _indi.IsDecreasing(2);
         _result &= _indi.IsDecByPct(-_level, 0, 0, 3);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
-        // @todo: Signal: Changing from positive values to negative.
+        // Signal: Changing from positive values to negative.
+        _result &= _indi.IsIncreasing(1, 0, 2);
         break;
     }
     return _result;
