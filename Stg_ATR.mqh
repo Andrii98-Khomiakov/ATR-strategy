@@ -99,19 +99,19 @@ class Stg_ATR : public Strategy {
       case ORDER_TYPE_BUY:
         // Buy: if the indicator is increasing and above zero.
         // Buy: if the indicator values are increasing.
-        _result &= _indi.IsIncreasing(2);
-        _result &= _indi.IsIncByPct(_level, 0, 0, 3);
+        _result &= _indi.IsIncreasing(2, 0, _shift);
+        _result &= _indi.IsIncByPct(_level, 0, _shift, 3);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         // Signal: Changing from negative values to positive.
-        _result &= _indi.IsDecreasing(1, 0, 2);
+        _result &= _indi.IsDecreasing(1, 0, _shift + 2);
         break;
       case ORDER_TYPE_SELL:
         // Sell: if the indicator is decreasing and below zero and a column is red.
-        _result &= _indi.IsDecreasing(2);
-        _result &= _indi.IsDecByPct(-_level, 0, 0, 3);
+        _result &= _indi.IsDecreasing(2, 0, _shift);
+        _result &= _indi.IsDecByPct(-_level, 0, _shift, 3);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         // Signal: Changing from positive values to negative.
-        _result &= _indi.IsIncreasing(1, 0, 2);
+        _result &= _indi.IsIncreasing(1, 0, _shift + 2);
         break;
     }
     return _result;
